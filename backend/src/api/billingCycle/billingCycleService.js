@@ -15,13 +15,13 @@ BillingCycle.route('count',(request, response, next) => {
 })
 
 BillingCycle.route('summary',(request, response, next) => {
-    BillingCycle.aggregate({
+    BillingCycle.aggregate([{
         $project : {credit: {$sum: "$credits.value"}, debit: {$sum: "$debts.value"}}
     },{
         $group: {_id: null, credit: {$sum: "$credit"}, debit: {$sum: "$debit"}}
     },{
         $project: {_id: 0, credit: 1, debit: 1}
-    }, (error, result) => {
+    }], (error, result) => {
         if(error){
             response.status(500).json({errors: [error]})
         } else{
