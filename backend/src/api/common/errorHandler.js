@@ -4,13 +4,14 @@ module.exports = (request, response, next) => {
     const bundle = response.locals.bundle
     
     if(bundle.errors){
-        response.status(500).json(parseErrorMessages(bundle.errors))
+        const errors = parseErrorMessages(bundle.errors)
+        response.status(500).json({errors})
     } else {
         next()
     }
 }
 
-parseErrorMessages = (errorsList) => {
+const parseErrorMessages = (errorsList) => {
     const errors = []
 
     _.forIn(errorsList,error => errors.push(error.message))

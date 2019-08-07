@@ -13,7 +13,7 @@ const debtSchema = new mongoose.Schema({
             enum: ['PAGO', 'PENDENTE', 'AGENDADO']}
 })
 
-const billinCycleSchema = new mongoose.Schema({
+const billingCycleSchema = new mongoose.Schema({
     name: {type: String, required: true},
     month: { type: Number, min:1, max: 12, required: true},
     year: {type: Number, min: 1970, max:2100, required: true},
@@ -21,4 +21,4 @@ const billinCycleSchema = new mongoose.Schema({
     debts: [debtSchema]
 })
 
-module.exports = restful.model('BillingCycle', billinCycleSchema)
+module.exports = restful.model('BillingCycle', billingCycleSchema)
