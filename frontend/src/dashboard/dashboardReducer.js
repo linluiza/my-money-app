@@ -1,7 +1,11 @@
 const INITIAL_STATE = {summary: {credit: 0, debt: 0}}
 
 function dashboardReducer(state=INITIAL_STATE, action){
-    return state
+    if(action.type == "BILLING_SUMMARY_LOADED"){
+        return {...state, summary: action.payload.data }
+    } else {
+        return state
+    }
 }
 
 export default dashboardReducer

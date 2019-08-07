@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux';
 
 import ContentHeader from '../common/template/contentHeader'
 import Content from '../common/template/content'
 import Row from '../common/layout/row'
 import ValueBox from '../common/widget/valueBox'
+import {getSummary} from './dasboardActions'
 
 // const urlBackend = 'http://localhost:3003/api/billingCycles'
 
@@ -21,10 +23,11 @@ class Dashboard extends Component{
     //     }
     // }
 
-    // componentWillMount(){
-    //     axios.get(`${urlBackend}/summary`)
-    //         .then(resp => this.setState(resp.data))
-    // }
+    componentWillMount(){
+        // axios.get(`${urlBackend}/summary`)
+        //     .then(resp => this.setState(resp.data))
+        this.props.getSummary()
+    }
 
     render() {
         const {credit, debt} = this.props.summary
@@ -44,5 +47,6 @@ class Dashboard extends Component{
 }
 
 const mapStateToProps = state => ({ summary: state.dashboard.summary })
+const mapDispatchToProps = dispatch => bindActionCreators({getSummary}, dispatch)
 
-export default connect(mapStateToProps) (Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps) (Dashboard)
