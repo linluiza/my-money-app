@@ -9,23 +9,8 @@ import Row from '../common/layout/row'
 import ValueBox from '../common/widget/valueBox'
 import {getSummary} from './dasboardActions'
 
-// const urlBackend = 'http://localhost:3003/api/billingCycles'
-
 class Dashboard extends Component{
-    /*Metodos nbecessarios para popular dados sem redux
-    */
-    // constructor(props){
-    //     super(props)
-
-    //     this.state = {
-    //         credit: 0,
-    //         debt: 0
-    //     }
-    // }
-
     componentWillMount(){
-        // axios.get(`${urlBackend}/summary`)
-        //     .then(resp => this.setState(resp.data))
         this.props.getSummary()
     }
 

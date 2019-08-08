@@ -1,6 +1,6 @@
 const INITIAL_STATE = {selected: ''}
 
-function handleTab(state=INITIAL_STATE, action){
+export default function (state=INITIAL_STATE, action){
     switch(action.type){
         case 'TAB_SELECTED':
             return {...state, selected: action.payload}
@@ -8,5 +8,3 @@ function handleTab(state=INITIAL_STATE, action){
             return state
     }
 }
-
-export default {handleTab}

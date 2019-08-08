@@ -6,4 +6,4 @@ function selectTab(tabId){
     }
 }
 
-export default {selectTab}
+export {selectTab}
