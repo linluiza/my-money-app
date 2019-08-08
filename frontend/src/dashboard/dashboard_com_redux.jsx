@@ -7,27 +7,30 @@ import ContentHeader from '../common/template/contentHeader'
 import Content from '../common/template/content'
 import Row from '../common/layout/row'
 import ValueBox from '../common/widget/valueBox'
+import {getSummary} from './dasboardActions'
 
-const urlBackend = 'http://localhost:3003/api/billingCycles'
+// const urlBackend = 'http://localhost:3003/api/billingCycles'
 
 class Dashboard extends Component{
-    constructor(props){
-        super(props)
+    /*Metodos nbecessarios para popular dados sem redux
+    */
+    // constructor(props){
+    //     super(props)
 
-        this.state = {
-            credit: 0,
-            debt: 0
-        }
-    }
+    //     this.state = {
+    //         credit: 0,
+    //         debt: 0
+    //     }
+    // }
 
     componentWillMount(){
-        axios.get(`${urlBackend}/summary`)
-            .then(resp => this.setState(resp.data))
-    
+        // axios.get(`${urlBackend}/summary`)
+        //     .then(resp => this.setState(resp.data))
+        this.props.getSummary()
     }
 
     render() {
-        const {credit, debt} = this.state
+        const {credit, debt} = this.props.summary
         return (
             <div>
                 <ContentHeader title="Dashboard" subtitle="versao 1.0" />
@@ -43,4 +46,7 @@ class Dashboard extends Component{
     }
 }
 
-export default Dashboard
+const mapStateToProps = state => ({ summary: state.dashboard.summary })
+const mapDispatchToProps = dispatch => bindActionCreators({getSummary}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps) (Dashboard)
