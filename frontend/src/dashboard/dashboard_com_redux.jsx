@@ -7,7 +7,7 @@ import ContentHeader from '../common/template/contentHeader'
 import Content from '../common/template/content'
 import Row from '../common/layout/row'
 import ValueBox from '../common/widget/valueBox'
-import {getSummary} from './dasboardActions'
+import {getSummary} from './dashboardActions'
 
 class Dashboard extends Component{
     componentWillMount(){
