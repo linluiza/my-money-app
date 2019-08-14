@@ -2,10 +2,12 @@ import {combineReducers} from 'redux'
 
 import dashboardReducer from '../dashboard/dashboardReducer'
 import tabReducer from '../common/tabs/tabReducers'
+import billingCycleReducer from '../billingCycle/billingCycleReducer'
 
 const rootReducer = combineReducers({
     dashboard: dashboardReducer,
-    tab: tabReducer
+    tab: tabReducer,
+    billingCycle: billingCycleReducer
 })
 
 export default rootReducer

@@ -6,6 +6,7 @@ import {selectTab} from './tabActions'
 import If from '../operator/if'
 
 class TabHeader extends Component{
+
     render(){
         const selected = this.props.tab.selected == this.props.target
         const visible = this.props.tab.tabsToShow[this.props.target] || false
