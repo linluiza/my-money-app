@@ -10,4 +10,12 @@ function listCycles(){
     }
 }
 
-export {listCycles}
+function createNew(cycleFields){
+    var request = axios.post(`${URL_BASE}/billingCycles`,cycleFields)
+    return {
+        type: 'BILLING_CYCLE_CREATED',
+        payload: request
+    }
+}
+
+export {listCycles, createNew}

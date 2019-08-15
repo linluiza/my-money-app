@@ -1,22 +1,15 @@
 import React, {Component} from 'react'
+import {reduxForm, Field} from 'redux-form'
 
 class CycleForm extends Component{
     render(){
+        const {handleSubmit} = this.props
         return(
-            <form role='form'>
+            <form role='form' onSubmit={handleSubmit}>
                 <div className='box-body'>
-                    <div className='form-group'>
-                        <label>Name:</label>
-                        <input id='cycleName' type='text'></input>
-                    </div>
-                    <div className='form-group'>
-                        <label>Month:</label>
-                        <input id='cycleMonth' type='number'></input>
-                    </div>
-                    <div className='form-group'>
-                        <label>Year:</label>
-                        <input id='cycleYear' type='number'></input>
-                    </div>
+                    <Field component='input' name='name'></Field>
+                    <Field component='input' name='month'></Field>
+                    <Field component='input' name='year'></Field>
                 </div>
                 <div className='box-footer'>
                     <button type='submit' className='btn btn primary'>{this.props.buttonLabel}</button>
@@ -26,4 +19,4 @@ class CycleForm extends Component{
     }
 }
 
-export default CycleForm
+export default reduxForm({form: 'billingCycleForm'}) (CycleForm)
