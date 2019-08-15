@@ -9,9 +9,20 @@ class CycleList extends Component{
         this.props.listCycles()
     }
 
+    renderRows(){
+        const dataList = this.props.cycles || []
+        return dataList.map(item => (
+                <tr key={item._id}>
+                    <td>{item.name}</td> 
+                    <td>{item.month}</td>
+                    <td>{item.year}</td>
+                </tr>
+            ))
+    }
+
     render(){
         return (
-            <table>
+            <table className='table'>
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -20,13 +31,7 @@ class CycleList extends Component{
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.cycles.map(item => (
-                        <tr key={item._id}>
-                            <td>{item.name}</td> 
-                            <td>{item.month}</td>
-                            <td>{item.year}</td>
-                        </tr>
-                    ))}
+                    {this.renderRows()}
                 </tbody>
             </table>
         )
