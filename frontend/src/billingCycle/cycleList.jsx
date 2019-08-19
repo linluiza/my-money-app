@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
-import {listCycles} from './billingCycleActions'
+import {listCycles, startCycleEdit} from './billingCycleActions'
+import Button from '../common/template/button'
 
 class CycleList extends Component{
     componentWillMount(){
@@ -16,6 +17,10 @@ class CycleList extends Component{
                     <td>{item.name}</td> 
                     <td>{item.month}</td>
                     <td>{item.year}</td>
+                    <td>
+                        <Button id='alterar' name='Alterar' icon='pencil' type='warning' 
+                            onClick={() => {this.props.startCycleEdit(item)}}/>
+                    </td>
                 </tr>
             ))
     }
@@ -28,6 +33,7 @@ class CycleList extends Component{
                         <th>Nome</th>
                         <th>Mês</th>
                         <th>Ano</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +45,6 @@ class CycleList extends Component{
 }
 
 const mapStateToProps = state => ({cycles: state.billingCycle.cycles})
-const mapDispatchToProps = dispatch => bindActionCreators({listCycles}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({listCycles, startCycleEdit}, dispatch)
 
 export default connect(mapStateToProps,mapDispatchToProps) (CycleList)

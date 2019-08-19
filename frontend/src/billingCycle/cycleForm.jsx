@@ -20,7 +20,7 @@ class CycleForm extends Component{
                         placeholder='Preencha o ano'></Field>
                 </div>
                 <div className='box-footer'>
-                    <button type='submit' className='btn btn primary'>{this.props.buttonLabel}</button>
+                    <button type='submit' className='btn btn-primary'>{this.props.buttonLabel}</button>
                 </div>
             </form>
         )

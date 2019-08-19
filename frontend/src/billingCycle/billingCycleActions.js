@@ -2,7 +2,7 @@ import axios from 'axios'
 import {toastr} from 'react-redux-toastr'
 import {reset as resetForm} from 'redux-form'
 
-import {selectTabs, selectTab} from '../common/tabs/tabActions'
+import {selectTab, showTabs} from '../common/tabs/tabActions'
 
 const URL_BASE = 'http://localhost:3003/api'
 
@@ -34,4 +34,18 @@ function createNew(cycleFields){
     }
 }
 
-export {listCycles, createNew}
+function startCycleEdit(item){   
+    return [
+        showTabs('tabUpdate'),
+        selectTab('tabUpdate')
+    ]
+}
+
+function updateCycle(){
+    return [
+        showTabs('tabList', 'tabCreate'),
+        selectTab('tabList')
+    ]
+}
+
+export {listCycles, createNew, startCycleEdit, updateCycle}
