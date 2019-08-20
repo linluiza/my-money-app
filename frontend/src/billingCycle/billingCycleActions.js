@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {toastr} from 'react-redux-toastr'
 import {reset as resetForm} from 'redux-form'
+import {initialize} from 'redux-form'
 
 import {selectTab, showTabs} from '../common/tabs/tabActions'
 
@@ -23,7 +24,6 @@ function createNew(cycleFields){
                     resetForm('billingCycleForm'),
                     selectTab('tabList'),
                     listCycles(),
-
                 ])
             })
             .catch( e => {
@@ -34,18 +34,19 @@ function createNew(cycleFields){
     }
 }
 
-function startCycleEdit(item){   
+function startCycleEdit(item){  
     return [
         showTabs('tabUpdate'),
-        selectTab('tabUpdate')
-    ]
+        selectTab('tabUpdate'),
+        initialize('billingCycleForm', item)]
 }
 
-function updateCycle(){
+function init(){
     return [
+        resetForm('billingCycleForm'),
         showTabs('tabList', 'tabCreate'),
         selectTab('tabList')
     ]
 }
 
-export {listCycles, createNew, startCycleEdit, updateCycle}
+export {listCycles, createNew, startCycleEdit, init}

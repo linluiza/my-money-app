@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {reduxForm, Field} from 'redux-form'
+import {init} from './billingCycleActions'
 
 import InputAndLabel from '../common/form/inputAndLabel'
 
@@ -20,11 +21,14 @@ class CycleForm extends Component{
                         placeholder='Preencha o ano'></Field>
                 </div>
                 <div className='box-footer'>
-                    <button type='submit' className='btn btn-primary'>{this.props.buttonLabel}</button>
+                    <div className='form-group'>
+                        <button type='submit' className='btn btn-primary'>{this.props.buttonLabel}</button>
+                        <button className='btn btn-default' onClick={init}>Cancel</button>
+                    </div>
                 </div>
             </form>
         )
     }
 }
 
-export default reduxForm({form: 'billingCycleForm'}) (CycleForm)
+export default reduxForm({form: 'billingCycleForm', destroyOnUnmount: false}) (CycleForm)
