@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {reduxForm, Field} from 'redux-form'
-import {init} from './billingCycleActions'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
+import {init} from './billingCycleActions'
 import InputAndLabel from '../common/form/inputAndLabel'
 
 class CycleForm extends Component{
@@ -23,7 +25,7 @@ class CycleForm extends Component{
                 <div className='box-footer'>
                     <div className='form-group'>
                         <button type='submit' className='btn btn-primary'>{this.props.buttonLabel}</button>
-                        <button className='btn btn-default' onClick={init}>Cancel</button>
+                        <button type='button' className='btn btn-default' onClick={this.props.init}>Cancel</button>
                     </div>
                 </div>
             </form>
@@ -31,4 +33,7 @@ class CycleForm extends Component{
     }
 }
 
-export default reduxForm({form: 'billingCycleForm', destroyOnUnmount: false}) (CycleForm)
+CycleForm = reduxForm({form: 'billingCycleForm', destroyOnUnmount: false}) (CycleForm)
+const mapDispatchToProps = dispatch => bindActionCreators({init}, dispatch)
+
+export default connect(null,mapDispatchToProps)(CycleForm)
