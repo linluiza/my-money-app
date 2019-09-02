@@ -1,9 +1,19 @@
 import React, {Component} from 'react'
+import {Field, arrayInsert} from 'redux-form'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+
 import Grid from '../common/layout/grid'
-import {Field} from 'redux-form'
 import Input from '../common/form/input'
+import Button from '../common/template/button'
 
 class CreditList extends Component{
+    add(index, item={}){
+        if(!this.props.readOnly){
+            this.props.arrayInsert('billingCycleForm','credits',index, item)
+        }
+    }
+
     renderRows(){
         const list = this.props.list || []
 
@@ -13,7 +23,9 @@ class CreditList extends Component{
                     placeholder='Informe o nome' readOnly={this.props.readOnly}/></td>
                 <td><Field name={`credits[${index}].value`} component={Input} 
                     placeholder='Informe o valor' readOnly={this.props.readOnly}/></td>
-                <td></td>
+                <td>
+                    <Button id='add' type='success' icon='plus' onClick={() => this.add(index+1)}/>
+                </td>
             </tr>
         ))
     }
@@ -28,7 +40,7 @@ class CreditList extends Component{
                             <tr>
                                 <th>Nome</th>
                                 <th>Valor</th>
-                                <th>Ações</th>
+                                <th className='table-actions'>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,5 +52,5 @@ class CreditList extends Component{
         )
     }
 }
-
-export default CreditList
+const mapDispatchToProps = dispatch => bindActionCreators({arrayInsert}, dispatch)
+export default connect(null, mapDispatchToProps) (CreditList)
