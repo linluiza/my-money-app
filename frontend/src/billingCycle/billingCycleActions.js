@@ -37,7 +37,22 @@ function startCycleEdit(item){
         initialize('billingCycleForm', item)
     ]
 }
-    
+
+function edit(item){
+    return dispatch => {
+        axios.put(`${URL_BASE}/billingCycles/${item._id}`,item)
+            .then(resp => {
+                toastr.success('Sucesso', 'Operação realizada com sucesso')
+                dispatch(init())
+            })
+            .catch( e => {
+                e.response.data.forEach(
+                    error => toastr.error('Error', error)
+                )
+            })
+    }
+}
+
 function init(){
     return [
         showTabs('tabList', 'tabCreate'),
@@ -47,4 +62,4 @@ function init(){
     ]
 }
 
-export {listCycles, createNew, startCycleEdit, init}
+export {listCycles, createNew, startCycleEdit, init, edit}
