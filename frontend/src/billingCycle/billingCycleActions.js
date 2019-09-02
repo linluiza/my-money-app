@@ -41,6 +41,29 @@ function startCycleEdit(item){
 function edit(item){
     return dispatch => {
         axios.put(`${URL_BASE}/billingCycles/${item._id}`,item)
+        .then(resp => {
+            toastr.success('Sucesso', 'Operação realizada com sucesso')
+            dispatch(init())
+        })
+        .catch( e => {
+            e.response.data.forEach(
+                error => toastr.error('Error', error)
+                )
+            })
+        }
+    }
+    
+function startCycleRemove(item){  
+    return [
+        showTabs('tabDelete'),
+        selectTab('tabDelete'),
+        initialize('billingCycleForm', item)
+    ]
+}
+    
+function remove(item){
+    return dispatch => {
+        axios.delete(`${URL_BASE}/billingCycles/${item._id}`)
             .then(resp => {
                 toastr.success('Sucesso', 'Operação realizada com sucesso')
                 dispatch(init())
@@ -62,4 +85,4 @@ function init(){
     ]
 }
 
-export {listCycles, createNew, startCycleEdit, init, edit}
+export {listCycles, createNew, startCycleEdit, init, edit, startCycleRemove, remove}

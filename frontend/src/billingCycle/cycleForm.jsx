@@ -8,19 +8,22 @@ import InputAndLabel from '../common/form/inputAndLabel'
 
 class CycleForm extends Component{
     render(){
-        const {handleSubmit} = this.props
+        const {handleSubmit, readOnly} = this.props
         return(
             <form role='form' onSubmit={handleSubmit}>
                 <div className='box-body'>
                     <Field component={InputAndLabel} name='name'
                         label='Nome' cols='12 4'
-                        placeholder='Preencha o nome'></Field>
+                        placeholder='Preencha o nome'
+                        readOnly={readOnly}></Field>
                     <Field component={InputAndLabel} name='month'
                         label='Mês' cols='12 4' type='number'
-                        placeholder='Preencha o mês'></Field>
+                        placeholder='Preencha o mês'
+                        readOnly={readOnly}></Field>
                     <Field component={InputAndLabel} name='year'
                         label='Ano' cols='12 4' type='number'
-                        placeholder='Preencha o ano'></Field>
+                        placeholder='Preencha o ano'
+                        readOnly={readOnly}></Field>
                 </div>
                 <div className='box-footer'>
                     <div className='form-group'>
