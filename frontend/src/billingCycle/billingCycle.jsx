@@ -22,6 +22,7 @@ class BillingCycle extends Component {
     }
 
     render() {
+        var {createNew, edit, remove} = this.props 
         return(
             <div>
                 <ContentHeader title="Ciclos de Pagamento" subtitle="Cadastro"/>
@@ -38,13 +39,13 @@ class BillingCycle extends Component {
                                 <CycleList />
                             </TabContent>
                             <TabContent id='tabCreate'>
-                                <CycleForm onSubmit={this.props.createNew} buttonLabel='Submit'></CycleForm>
+                                <CycleForm onSubmit={createNew} submitLabel='Incluir' submitClass='primary'></CycleForm>
                             </TabContent>
                             <TabContent id='tabUpdate'>
-                                <CycleForm onSubmit={this.props.edit} buttonLabel='Alterar'></CycleForm>
+                                <CycleForm onSubmit={edit} submitLabel='Alterar' submitClass='info'></CycleForm>
                             </TabContent>
                             <TabContent id='tabDelete'>
-                                <CycleForm onSubmit={this.props.remove} buttonLabel='Remover' readOnly={true}></CycleForm>
+                                <CycleForm onSubmit={remove} submitLabel='Remover' submitClass='danger' readOnly={true}></CycleForm>
                             </TabContent>
                         </TabsContent>
                     </Tabs>

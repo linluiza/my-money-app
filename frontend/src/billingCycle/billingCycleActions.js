@@ -30,10 +30,10 @@ function createNew(cycleFields){
     }
 }
 
-function startCycleEdit(item){  
+function showTabContent(tabId,item){  
     return [
-        showTabs('tabUpdate'),
-        selectTab('tabUpdate'),
+        showTabs(tabId),
+        selectTab(tabId),
         initialize('billingCycleForm', item)
     ]
 }
@@ -50,15 +50,7 @@ function edit(item){
                 error => toastr.error('Error', error)
                 )
             })
-        }
     }
-    
-function startCycleRemove(item){  
-    return [
-        showTabs('tabDelete'),
-        selectTab('tabDelete'),
-        initialize('billingCycleForm', item)
-    ]
 }
     
 function remove(item){
@@ -85,4 +77,4 @@ function init(){
     ]
 }
 
-export {listCycles, createNew, startCycleEdit, init, edit, startCycleRemove, remove}
+export {listCycles, createNew, showTabContent, init, edit, remove}

@@ -8,27 +8,31 @@ import InputAndLabel from '../common/form/inputAndLabel'
 
 class CycleForm extends Component{
     render(){
-        const {handleSubmit, readOnly} = this.props
+        const {handleSubmit, init} = this.props
+        const {readOnly, submitClass, submitLabel} = this.props
         return(
             <form role='form' onSubmit={handleSubmit}>
                 <div className='box-body'>
                     <Field component={InputAndLabel} name='name'
                         label='Nome' cols='12 4'
                         placeholder='Preencha o nome'
-                        readOnly={readOnly}></Field>
+                        readOnly={readOnly}>
+                    </Field>
                     <Field component={InputAndLabel} name='month'
                         label='Mês' cols='12 4' type='number'
                         placeholder='Preencha o mês'
-                        readOnly={readOnly}></Field>
+                        readOnly={readOnly}>
+                    </Field>
                     <Field component={InputAndLabel} name='year'
                         label='Ano' cols='12 4' type='number'
                         placeholder='Preencha o ano'
-                        readOnly={readOnly}></Field>
+                        readOnly={readOnly}>
+                    </Field>
                 </div>
                 <div className='box-footer'>
                     <div className='form-group'>
-                        <button type='submit' className='btn btn-primary'>{this.props.buttonLabel}</button>
-                        <button type='button' className='btn btn-default' onClick={this.props.init}>Cancel</button>
+                        <button type='submit' className={`btn btn-${submitClass}`}>{submitLabel}</button>
+                        <button type='button' className='btn btn-default' onClick={init}>Cancel</button>
                     </div>
                 </div>
             </form>
