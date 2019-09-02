@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Field, arrayInsert} from 'redux-form'
+import {Field, arrayInsert, arrayRemove} from 'redux-form'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -14,6 +14,12 @@ class CreditList extends Component{
         }
     }
 
+    remove(index){
+        if(!this.props.readOnly){
+            this.props.arrayRemove('billingCycleForm','credits',index)
+        }
+    }
+
     renderRows(){
         const list = this.props.list || []
 
@@ -21,10 +27,12 @@ class CreditList extends Component{
             <tr key={index}>
                 <td><Field name={`credits[${index}].name`} component={Input} 
                     placeholder='Informe o nome' readOnly={this.props.readOnly}/></td>
-                <td><Field name={`credits[${index}].value`} component={Input} 
+                <td><Field name={`credits[${index}].value`} component={Input} type='number'
                     placeholder='Informe o valor' readOnly={this.props.readOnly}/></td>
                 <td>
                     <Button id='add' type='success' icon='plus' onClick={() => this.add(index+1)}/>
+                    <Button id='clone' type='warning' icon='clone' onClick={() => this.add(index+1, item)}/>
+                    <Button id='delete' type='error' icon='trash-o' onClick={() => this.remove(index)}/>
                 </td>
             </tr>
         ))
@@ -52,5 +60,5 @@ class CreditList extends Component{
         )
     }
 }
-const mapDispatchToProps = dispatch => bindActionCreators({arrayInsert}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({arrayInsert, arrayRemove}, dispatch)
 export default connect(null, mapDispatchToProps) (CreditList)
