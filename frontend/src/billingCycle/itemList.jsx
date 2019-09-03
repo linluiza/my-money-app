@@ -7,32 +7,34 @@ import Grid from '../common/layout/grid'
 import Input from '../common/form/input'
 import Button from '../common/template/button'
 
-class CreditList extends Component{
+class ItemList extends Component{
     add(index, item={}){
-        if(!this.props.readOnly){
-            this.props.arrayInsert('billingCycleForm','credits',index, item)
+        const {field, readOnly} = this.props
+        if(!readOnly){
+            this.props.arrayInsert('billingCycleForm',field,index, item)
         }
     }
 
     remove(index){
-        if(!this.props.readOnly){
-            this.props.arrayRemove('billingCycleForm','credits',index)
+        if(!this.props.readOnly && this.props.list.length > 1){
+            this.props.arrayRemove('billingCycleForm',field,index)
         }
     }
 
     renderRows(){
         const list = this.props.list || []
+        const {field, readOnly} = this.props
 
         return list.map((item, index) => (
             <tr key={index}>
-                <td><Field name={`credits[${index}].name`} component={Input} 
-                    placeholder='Informe o nome' readOnly={this.props.readOnly}/></td>
-                <td><Field name={`credits[${index}].value`} component={Input} type='number'
-                    placeholder='Informe o valor' readOnly={this.props.readOnly}/></td>
+                <td><Field name={`${field}[${index}].name`} component={Input} 
+                    placeholder='Informe o nome' readOnly={readOnly}/></td>
+                <td><Field name={`${field}[${index}].value`} component={Input} type='number'
+                    placeholder='Informe o valor' readOnly={readOnly}/></td>
                 <td>
                     <Button id='add' type='success' icon='plus' onClick={() => this.add(index+1)}/>
                     <Button id='clone' type='warning' icon='clone' onClick={() => this.add(index+1, item)}/>
-                    <Button id='delete' type='error' icon='trash-o' onClick={() => this.remove(index)}/>
+                    <Button id='delete' type='danger' icon='trash-o' onClick={() => this.remove(index)}/>
                 </td>
             </tr>
         ))
@@ -42,7 +44,7 @@ class CreditList extends Component{
         return (
             <Grid cols={this.props.cols}>
                 <fieldset>
-                    <legend>Lista de Créditos</legend>
+                    <legend>{this.props.legend}</legend>
                     <table className='table'>
                         <thead>
                             <tr>
@@ -61,4 +63,4 @@ class CreditList extends Component{
     }
 }
 const mapDispatchToProps = dispatch => bindActionCreators({arrayInsert, arrayRemove}, dispatch)
-export default connect(null, mapDispatchToProps) (CreditList)
+export default connect(null, mapDispatchToProps) (ItemList)
