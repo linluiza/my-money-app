@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux'
 import Grid from '../common/layout/grid'
 import Input from '../common/form/input'
 import Button from '../common/template/button'
+import If from '../common/operator/if'
 
 class ItemList extends Component{
     add(index, item={}){
@@ -14,9 +15,10 @@ class ItemList extends Component{
             this.props.arrayInsert('billingCycleForm',field,index, item)
         }
     }
-
+    
     remove(index){
-        if(!this.props.readOnly && this.props.list.length > 1){
+        const {field, readOnly} = this.props
+        if(!readOnly && this.props.list.length > 1){
             this.props.arrayRemove('billingCycleForm',field,index)
         }
     }
@@ -24,6 +26,12 @@ class ItemList extends Component{
     renderRows(){
         const list = this.props.list || []
         const {field, readOnly} = this.props
+        const isDebt = field == 'debts'
+
+        if(list.length == 0){
+            //inserindo elemento vazio, para possibilitar a inserção de novos elementos
+            list.push({})
+        }
 
         return list.map((item, index) => (
             <tr key={index}>
@@ -31,6 +39,10 @@ class ItemList extends Component{
                     placeholder='Informe o nome' readOnly={readOnly}/></td>
                 <td><Field name={`${field}[${index}].value`} component={Input} type='number'
                     placeholder='Informe o valor' readOnly={readOnly}/></td>
+                <If condition={isDebt}>
+                    <td><Field name={`${field}[${index}].status`} component={Input}
+                        placeholder='Informe o status' readOnly={readOnly}/></td>
+                </If>
                 <td>
                     <Button id='add' type='success' icon='plus' onClick={() => this.add(index+1)}/>
                     <Button id='clone' type='warning' icon='clone' onClick={() => this.add(index+1, item)}/>
@@ -41,6 +53,7 @@ class ItemList extends Component{
     }
 
     render(){
+
         return (
             <Grid cols={this.props.cols}>
                 <fieldset>
@@ -50,6 +63,7 @@ class ItemList extends Component{
                             <tr>
                                 <th>Nome</th>
                                 <th>Valor</th>
+                                <If condition={this.props.field == 'debts'}><th>Status</th></If>
                                 <th className='table-actions'>Ações</th>
                             </tr>
                         </thead>

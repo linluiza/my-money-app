@@ -10,7 +10,7 @@ import ItemList from './itemList'
 class CycleForm extends Component{
     render(){
         const {handleSubmit, init} = this.props
-        const {readOnly, submitClass, submitLabel, credits} = this.props
+        const {readOnly, submitClass, submitLabel, credits, debts} = this.props
         return(
             <form role='form' onSubmit={handleSubmit}>
                 <div className='box-body'>
@@ -31,8 +31,8 @@ class CycleForm extends Component{
                     </Field>
                     <ItemList cols='12 6' list={credits} readOnly={readOnly}
                         field='credits' legend='Créditos'/>
-                    <ItemList cols='12 6' readOnly={readOnly}
-                        field='debits' legend='Débitos'/>
+                    <ItemList cols='12 6' list={debts} readOnly={readOnly}
+                        field='debts' legend='Débitos'/>
                 </div>
                 <div className='box-footer'>
                     <div className='form-group'>
@@ -47,7 +47,10 @@ class CycleForm extends Component{
 
 CycleForm = reduxForm({form: 'billingCycleForm', destroyOnUnmount: false}) (CycleForm)
 const selector = formValueSelector('billingCycleForm')
-const mapStateToProps = state => ({credits: selector(state, 'credits')})
+const mapStateToProps = state => ({
+    credits: selector(state, 'credits'), 
+    debts: selector(state, 'debts'), 
+})
 const mapDispatchToProps = dispatch => bindActionCreators({init}, dispatch)
 
 export default connect(mapStateToProps,mapDispatchToProps)(CycleForm)
