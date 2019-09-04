@@ -9,22 +9,18 @@ import ItemList from './itemList'
 import Summary from '../common/widget/summary'
 
 class CycleForm extends Component{
+    getCycleSummary(){
+        const sum = (t,v) => t + v
+        return {
+            totalCredit: this.props.credits.map(c => +c.value || 0).reduce(sum,0),
+            totalDebt: this.props.debts.map(d => +d.value || 0).reduce(sum,0)
+        }
+    }
+
     render(){
         const {handleSubmit, init} = this.props
         const {readOnly, submitClass, submitLabel, credits, debts} = this.props
-
-        const credit = credits.reduce((sum,credit) => {
-            if(credit.value)
-                return sum + Number(credit.value)
-            else
-                return sum
-        }, 0)
-        const debt = debts.reduce((sum,debt) =>{
-            if(debt.value)
-                return sum +  Number(debt.value)
-            else
-                return sum
-        }, 0)
+        const {totalCredit, totalDebt} = this.getCycleSummary()
         
         return(
             <form role='form' onSubmit={handleSubmit}>
@@ -45,8 +41,8 @@ class CycleForm extends Component{
                         readOnly={readOnly}>
                     </Field>
 
-                    <Summary credit={credit} debt={debt} />
-                    
+                    <Summary credit={totalCredit} debt={totalDebt} />
+
                     <ItemList cols='12 6' list={credits} readOnly={readOnly}
                         field='credits' legend='Créditos'/>
                     <ItemList cols='12 6' list={debts} readOnly={readOnly}
