@@ -9,7 +9,7 @@ import Button from '../common/template/button'
 import If from '../common/operator/if'
 
 class ItemList extends Component{
-    add(index, item={}){
+    add(index, item={name: '', value: null}){
         const {field, readOnly} = this.props
         if(!readOnly){
             this.props.arrayInsert('billingCycleForm',field,index, item)
@@ -36,9 +36,9 @@ class ItemList extends Component{
         return list.map((item, index) => (
             <tr key={index}>
                 <td><Field name={`${field}[${index}].name`} component={Input} 
-                    placeholder='Informe o nome' readOnly={readOnly}/></td>
+                    placeholder='Informe o nome' readOnly={readOnly} type='text'/></td>
                 <td><Field name={`${field}[${index}].value`} component={Input} type='number'
-                    placeholder='Informe o valor' readOnly={readOnly}/></td>
+                    placeholder='Informe o valor' readOnly={readOnly} type='text'/></td>
                 <If condition={isDebt}>
                     <td><Field name={`${field}[${index}].status`} component={Input}
                         placeholder='Informe o status' readOnly={readOnly}/></td>

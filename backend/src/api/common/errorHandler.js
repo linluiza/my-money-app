@@ -2,10 +2,11 @@ const _ = require('lodash')
 
 module.exports = (request, response, next) => {
     const bundle = response.locals.bundle
+    console.log("bundle: "+ bundle)
     
-    if(bundle.errors){
-        const errors = parseErrorMessages(bundle.errors)
-        response.status(500).json({errors})
+    if(bundle && bundle.errors){
+        console.log("bundle errors: "+bundle.errors)
+        response.status(500).json(parseErrorMessages(bundle.errors))
     } else {
         next()
     }
