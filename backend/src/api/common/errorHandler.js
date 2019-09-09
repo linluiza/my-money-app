@@ -2,7 +2,7 @@ const _ = require('lodash')
 
 module.exports = (request, response, next) => {
     const bundle = response.locals.bundle
-    
+
     if(bundle.errors){
         response.status(500).json(parseErrorMessages(bundle.errors))
     } else {
