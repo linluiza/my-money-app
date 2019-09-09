@@ -17,6 +17,7 @@ function listCycles(){
 
 function createNew(cycleFields){
     return dispatch => {
+        console.log(cycleFields)
         axios.post(`${URL_BASE}/billingCycles`,cycleFields)
             .then(resp => {
                 toastr.success('Sucesso', 'Operação realizada com sucesso')
@@ -40,6 +41,7 @@ function showTabContent(tabId,item){
 
 function edit(item){
     return dispatch => {
+        console.log(item)
         axios.put(`${URL_BASE}/billingCycles/${item._id}`,item)
         .then(resp => {
             toastr.success('Sucesso', 'Operação realizada com sucesso')
