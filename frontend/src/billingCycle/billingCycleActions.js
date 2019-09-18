@@ -23,11 +23,7 @@ function createNew(cycleFields){
                 toastr.success('Sucesso', 'Operação realizada com sucesso')
                 dispatch(init())
             })
-            .catch( e => {
-                e.response.data.forEach(
-                    error => toastr.error('Error', error)
-                )
-            })
+            .catch(e => handleErrors(e))
     }
 }
 
@@ -47,11 +43,7 @@ function edit(item){
             toastr.success('Sucesso', 'Operação realizada com sucesso')
             dispatch(init())
         })
-        .catch( e => {
-            e.response.data.forEach(
-                error => toastr.error('Error', error)
-                )
-            })
+        .catch( e => handleErrors(e))
     }
 }
     
@@ -62,11 +54,7 @@ function remove(item){
                 toastr.success('Sucesso', 'Operação realizada com sucesso')
                 dispatch(init())
             })
-            .catch( e => {
-                e.response.data.forEach(
-                    error => toastr.error('Error', error)
-                )
-            })
+            .catch( e => handleErrors(e))
     }
 }
 
@@ -77,6 +65,22 @@ function init(){
         listCycles(),
         initialize('billingCycleForm', INITIAL_STATE)
     ]
+}
+
+function handleErrors(e){
+    if(e.response && e.response.data){
+        var errorList = e.response.data
+        console.log(e.response.data)
+        if(e.response.data.errors){
+            errorList = e.response.data.errors
+        }
+
+        errorList.forEach(
+            error => toastr.error('Error', error)
+        )
+    } else {
+        toastr.error("Erro na comunicação com o servidor!")
+    }
 }
 
 export {listCycles, createNew, showTabContent, init, edit, remove}
