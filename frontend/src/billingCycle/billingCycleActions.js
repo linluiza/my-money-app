@@ -3,12 +3,14 @@ import {toastr} from 'react-redux-toastr'
 import {initialize} from 'redux-form'
 
 import {selectTab, showTabs} from '../common/tabs/tabActions'
+import {handleErrors} from '../common/util'
 
 const URL_BASE = 'http://localhost:3003/api'
 const INITIAL_STATE = {credits : [{}], debts: [{}]}
 
 function listCycles(){
     var  request = axios.get(`${URL_BASE}/billingCycles`)
+                    .catch( e => handleErrors(e))
     return {
         type: 'BILLING_CYCLE_LISTED',
         payload: request
@@ -65,22 +67,6 @@ function init(){
         listCycles(),
         initialize('billingCycleForm', INITIAL_STATE)
     ]
-}
-
-function handleErrors(e){
-    if(e.response && e.response.data){
-        var errorList = e.response.data
-        console.log(e.response.data)
-        if(e.response.data.errors){
-            errorList = e.response.data.errors
-        }
-
-        errorList.forEach(
-            error => toastr.error('Error', error)
-        )
-    } else {
-        toastr.error("Erro na comunicação com o servidor!")
-    }
 }
 
 export {listCycles, createNew, showTabContent, init, edit, remove}
