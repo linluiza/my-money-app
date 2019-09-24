@@ -1,7 +1,7 @@
 const userKey = '_mymoney_user'
 //localStorage: variavel global do browser
 const INITIAL_STATE = {
-    user: JSON.parse(localStorage.getItem(userKey)),
+    user: {name: "teste", email: "teste@email.com"},//JSON.parse(localStorage.getItem(userKey)),
     validToken: false
 }
 
