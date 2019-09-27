@@ -10,7 +10,7 @@ class Navbar extends Component {
     }
 
     changeOpen() {
-        this.setState({ open: !this.setState.open })
+        this.setState({ open: !this.state.open })
     }
 
     render() {
