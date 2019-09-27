@@ -1,7 +1,7 @@
 const userKey = '_mymoney_user'
 //localStorage: variavel global do browser
 const INITIAL_STATE = {
-    user: {name: "teste", email: "teste@email.com"},//JSON.parse(localStorage.getItem(userKey)),
+    user: JSON.parse(localStorage.getItem(userKey)),
     validToken: false
 }
 
@@ -12,7 +12,7 @@ export default (state = INITIAL_STATE, action) => {
                 return {...state, validToken: true}
             } else{
                 localStorage.removeItem(userKey)
-                return {...state, validToken: false, user: null}
+                return {...state, validToken: false, user: undefined}
             }
         case 'USER_FETCHED':
             localStorage.setItem(userKey, JSON.stringify(action.payload))

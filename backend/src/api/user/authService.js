@@ -18,11 +18,12 @@ const sendErrorsFromDB = (response, dbErrors) => {
 const login = (request, response, next) => {
     const email = request.body.email || ''
     const password = request.body.password || ''
+    console.log("iniciando login")
 
     User.findOne({email}, (err, user) => {
         if(err){
             return sendErrorsFromDB(response, err)
-        } else if(user && bcrypt.compareSponseync(password, user.password)){
+        } else if(user && bcrypt.compareSync(password, user.password)){
             const token = jwt.sign(user,env.authSecret, {
                 expiresponseIn: "1 day"
             })
@@ -43,10 +44,10 @@ const validateToken = (request, response, next) => {
 }
 
 const signup = (request, response, next) => {
-    const name = req.body.name || ''
-    const email = req.body.email || ''
-    const password = req.body.password || ''
-    const confirmPassword = req.body.confirmPassword || ''
+    const name = request.body.name || ''
+    const email = request.body.email || ''
+    const password = request.body.password || ''
+    const confirmPassword = request.body.confirm_password || ''
 
     if(!email.match(emailRegex)){
         return response.status(400).send({errors: ['O email informado está inválido']})
@@ -76,7 +77,7 @@ const signup = (request, response, next) => {
             const newUser = new User({name, email, password: passwordHash})
             newUser.save(err => {
                 if(err){
-                    return sendErrorsFromDB(res, err)
+                    return sendErrorsFromDB(response, err)
                 } else{
                     login(request, response, next)
                 }

@@ -11,9 +11,11 @@ export function signup(values){
 }
 
 function submit(values, url){
+    console.log("inicio submit")
     return dispatch => {
         axios.post(url, values)
             .then(resp => {
+                // console.log(resp)
                 dispatch([
                     {type: 'USER_FETCHED', payload: resp.data}
                 ])
