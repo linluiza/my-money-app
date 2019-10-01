@@ -38,7 +38,7 @@ class ItemList extends Component{
                 <td><Field name={`${field}[${index}].name`} component={Input} 
                     placeholder='Informe o nome' readOnly={readOnly} type='text'/></td>
                 <td><Field name={`${field}[${index}].value`} component={Input} type='number'
-                    placeholder='Informe o valor' readOnly={readOnly} type='text'/></td>
+                    placeholder='Informe o valor' readOnly={readOnly}/></td>
                 <If condition={isDebt}>
                     <td><Field name={`${field}[${index}].status`} component={Input}
                         placeholder='Informe o status' readOnly={readOnly}/></td>

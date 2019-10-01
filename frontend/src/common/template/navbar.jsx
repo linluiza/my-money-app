@@ -26,18 +26,18 @@ class Navbar extends Component {
                             className="dropdown-toggle"
                             data-toggle="dropdown">
                             <img src={require('../../resources/user.png')}
-                                className="user-image" alt="User Image" />
+                                className="user-image" alt="User" />
                             <span className="hidden-xs">{name}</span>
                         </a>
                         <ul className="dropdown-menu">
                             <li className="user-header">
                                 <img src={require('../../resources/user.png')}
-                                    className="img-circle" alt="User Image" />
+                                    className="img-circle" alt="User" />
                                 <p>{name}<small>{email}</small></p>
                             </li>
                             <li className="user-footer">
                                 <div className="pull-right">
-                                    <a href="#" onClick={this.props.logout}
+                                    <a href="/" onClick={this.props.logout}
                                         className="btn btn-default btn-flat">Sair</a>
                                 </div>
                             </li>

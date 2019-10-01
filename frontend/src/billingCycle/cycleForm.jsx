@@ -23,7 +23,7 @@ class CycleForm extends Component{
         const {totalCredit, totalDebt} = this.getCycleSummary()
         
         return(
-            <form role='form' onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div className='box-body'>
                     <Field component={InputAndLabel} name='name'
                         label='Nome' cols='12 4'

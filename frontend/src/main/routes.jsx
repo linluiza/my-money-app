@@ -6,7 +6,7 @@ import DashboardRedux from '../dashboard/dashboard_com_redux'
 import BillingCycle from '../billingCycle/billingCycle'
 
 export default props => (
-    <div className='content wrapper'>
+    <div className='content-wrapper'>
         <Switch>
             <Route exact path='/' component={Dashboard} />
             <Route path='/billingCycles' component={BillingCycle} />
